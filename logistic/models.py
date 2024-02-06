@@ -13,7 +13,7 @@ class Stock(models.Model):
         Product,
         through='StockProduct',
         related_name='stocks',
-    )
+        )
 
 
 class StockProduct(models.Model):
@@ -21,16 +21,15 @@ class StockProduct(models.Model):
         Stock,
         on_delete=models.CASCADE,
         related_name='positions',
-    )
+        )
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
         related_name='positions',
-    )
+        )
     quantity = models.PositiveIntegerField(default=1)
     price = models.DecimalField(
         max_digits=18,
         decimal_places=2,
         validators=[MinValueValidator(0)],
-        
-    )
+        )
