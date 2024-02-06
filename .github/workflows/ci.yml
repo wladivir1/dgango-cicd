@@ -8,28 +8,28 @@ jobs:
     tests:
         runs-on: ubuntu-22.04
         env:
-           ALLOWED_HOSTD: ${{ secrets.ALLOWED_HOSTS }}
-           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-           DEBUG: ${{ secrets.DEBUG }}
-           DB_NAME: ${{ secrets.DB_NAME }}
-           DB_USER: ${{ secrets.DB_USER }}
-           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-           DB_HOST: ${{ secrets.DB_HOST }}
-           DB_PORT: ${{ secrets.DB_PORT }} 
+            ALLOWED_HOSTD: ${{ secrets.ALLOWED_HOSTS }}
+            SECRET_KEY: ${{ secrets.SECRET_KEY }}
+            DEBUG: ${{ secrets.DEBUG }}
+            DB_NAME: ${{ secrets.DB_NAME }}
+            DB_USER: ${{ secrets.DB_USER }}
+            DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+            DB_HOST: ${{ secrets.DB_HOST }}
+            DB_PORT: ${{ secrets.DB_PORT }} 
         service:
-            name: postgresql_main
-            image: postgres:14.1
-            env:
-                POSTGRES_DB: ${{ env.DB_NAME }}
-                POSTGRES_USER: ${{ env.DB_USER }}
-                POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
-            port:
-                - 5432:5432
-            options: >-
-                --health-cmd pg_isready
-                --health-interval 10s
-                --health-timeout 5s
-                --health-retries 5 
+            postgresql_main:
+                image: postgres:12
+                env:
+                    POSTGRES_DB: ${{ env.DB_NAME }}
+                    POSTGRES_USER: ${{ env.DB_USER }}
+                    POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
+                port:
+                    - 5432:5432
+                options: 
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5 
         steps:
             - uses: actions/checkout@v3
             - name: Set up Python
