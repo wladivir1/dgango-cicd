@@ -63,10 +63,4 @@ jobs:
                 host: ${{ secrets.HOST }}
                 username: ${{ secrets.USER }}
                 password: ${{ secrets.PASSWORD }}
-                script: |
-                    cd /home/vv/dgango-cicd
-                    git pull origin main
-                    source venv/bin/activate
-                    pip install -r requirements.txt
-                    python manage.py migrate
-                    sudo systemctl restart gunicorn    
+                script: expect /home/vv/dgango-cicd/deploy.exp    
